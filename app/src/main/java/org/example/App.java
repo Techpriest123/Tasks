@@ -19,20 +19,18 @@ public class App {
 
     boolean programShouldHalt = false;
 
-    int prompt = 0;
-
     Task task = null;
 
     Scanner scan = new Scanner(System.in);
 
-    while (programShouldHalt) {
+    while (!programShouldHalt) {
       clearScreen();
       System.out.println("Выберите таск:");
       for (int i = 0; i < tasks.size(); i++) {
         System.out.println(i + 1 + ": " + tasks.get(i).getTitel());
       }
       System.out.println("0: Выход");
-      prompt = scan.nextInt() - 1;
+      int prompt = scan.nextInt() - 1;
       if (prompt == -1) {
         programShouldHalt = true;
         continue;
@@ -40,7 +38,7 @@ public class App {
         System.out.println("No task found");
       } else {
         try {
-          task = tasks.get(prompt - 1);
+          task = tasks.get(prompt);
         } catch (Exception e) {
           System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
           programShouldHalt = true;
@@ -52,16 +50,16 @@ public class App {
       }
       clearScreen();
       System.out.println("""
-              Выберите действие:
-              1: Описание
-              2: Код\
-              3: Демо
-              0: Выход
-              """);
+          Выберите действие:
+          1: Описание
+          2: Код\
+          3: Демо
+          0: Выход
+          """);
       prompt = scan.nextInt() - 1;
       clearScreen();
       if (prompt == -1) {
-          programShouldHalt = true;
+        programShouldHalt = true;
         continue;
       }
       if (prompt == 0) {
@@ -78,37 +76,37 @@ public class App {
       if (prompt == 1) {
         FileReader fr;
         try {
-          fr = new FileReader("./tasks/Task_");
+          fr = new FileReader("./tasks/Task_" + task.getTaskIndex() + ".java");
         } catch (Exception e) {
           System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
           programShouldHalt = true;
           continue;
         }
-          try (BufferedReader br = new BufferedReader(fr)) {
-              try {
-                  StringBuilder sb = new StringBuilder();
-                  String line = br.readLine();
+        try (BufferedReader br = new BufferedReader(fr)) {
+          try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
 
-                  while (line != null) {
-                      sb.append(line);
-                      sb.append(System.lineSeparator());
-                      line = br.readLine();
-                  }
+            while (line != null) {
+              sb.append(line);
+              sb.append(System.lineSeparator());
+              line = br.readLine();
+            }
 
-                  System.out.println(sb.toString());
-              } catch (Exception e) {
-                  System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
-                  programShouldHalt = true;
-                  continue;
-              }
+            System.out.println(sb.toString());
           } catch (Exception e) {
-              System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
-              programShouldHalt = true;
-              continue;
+            System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
+            programShouldHalt = true;
+            continue;
           }
+        } catch (Exception e) {
+          System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
+          programShouldHalt = true;
+          continue;
+        }
         System.out.println("0: Выход");
         String p = scan.nextLine();
-        while (p != "0") {
+        while (!p.equals("0")) {
           int cnt = p.length();
           System.out.println('\b' * cnt);
           p = scan.nextLine();
