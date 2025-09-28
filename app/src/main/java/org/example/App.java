@@ -3,6 +3,7 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import org.example.tasks.Task_1;
@@ -10,7 +11,7 @@ import org.example.util.Task;
 
 public class App {
 
-  private static LinkedList<Task> tasks = new LinkedList<Task>();
+  private static final LinkedList<Task> tasks = new LinkedList<Task>();
 
   public static void main(String[] args) {
 
@@ -50,11 +51,13 @@ public class App {
         System.out.println("Что-то пошло не так\nЗавершение");
       }
       clearScreen();
-      System.out.println("Выберите действие:\n"
-          + "1: Описание\n"
-          + "2: Код"
-          + "3: Демо\n"
-          + "0: Выход\n");
+      System.out.println("""
+              Выберите действие:
+              1: Описание
+              2: Код\
+              3: Демо
+              0: Выход
+              """);
       prompt = scan.nextInt() - 1;
       clearScreen();
       if (prompt == -1) {
@@ -66,7 +69,7 @@ public class App {
         System.out.println(task.getDescription() + "\n");
         System.out.println("0: Выход");
         String p = scan.nextLine();
-        while (p != "0") {
+        while (!Objects.equals(p, "0")) {
           int cnt = p.length();
           System.out.println('\b' * cnt);
           p = scan.nextLine();
@@ -81,31 +84,28 @@ public class App {
           programShouldHalt = true;
           continue;
         }
-        BufferedReader br = new BufferedReader(fr);
-        try {
-          StringBuilder sb = new StringBuilder();
-          String line = br.readLine();
+          try (BufferedReader br = new BufferedReader(fr)) {
+              try {
+                  StringBuilder sb = new StringBuilder();
+                  String line = br.readLine();
 
-          while (line != null) {
-            sb.append(line);
-            sb.append(System.lineSeparator());
-            line = br.readLine();
-          }
+                  while (line != null) {
+                      sb.append(line);
+                      sb.append(System.lineSeparator());
+                      line = br.readLine();
+                  }
 
-          System.out.println(sb.toString());
-        } catch (Exception e) {
-          System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
-          programShouldHalt = true;
-          continue;
-        } finally {
-          try {
-            br.close();
+                  System.out.println(sb.toString());
+              } catch (Exception e) {
+                  System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
+                  programShouldHalt = true;
+                  continue;
+              }
           } catch (Exception e) {
-            System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
-            programShouldHalt = true;
-            continue;
+              System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
+              programShouldHalt = true;
+              continue;
           }
-        }
         System.out.println("0: Выход");
         String p = scan.nextLine();
         while (p != "0") {
