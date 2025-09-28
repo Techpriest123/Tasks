@@ -5,12 +5,12 @@ import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import org.example.util.Task;
 import org.example.tasks.Task_1;
+import org.example.util.Task;
 
 public class App {
 
-  private static LinkedList<Task> tasks;
+  private static LinkedList<Task> tasks = new LinkedList<Task>();
 
   public static void main(String[] args) {
 
@@ -58,6 +58,7 @@ public class App {
       prompt = scan.nextInt() - 1;
       clearScreen();
       if (prompt == -1) {
+          programShouldHalt = true;
         continue;
       }
       if (prompt == 0) {
@@ -116,8 +117,8 @@ public class App {
       if (prompt == 2) {
         task.run(scan);
       }
-      scan.close();
     }
+    scan.close();
   }
 
   public static void clearScreen() {
