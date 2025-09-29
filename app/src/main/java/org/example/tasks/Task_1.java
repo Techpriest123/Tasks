@@ -21,27 +21,6 @@ public class Task_1 implements Task {
 
   public void run(Scanner scan) {
 
-    System.out.println("X: ");
-    float x = scan.nextFloat();
-    System.out.println("Y: ");
-    float y = scan.nextFloat();
-
-    if (x > 0 && y > 0)
-      System.out.println("Четверть 1");
-    if (x < 0 && y > 0)
-      System.out.println("Четверть 2");
-    if (x < 0 && y < 0)
-      System.out.println("Четверть 3");
-    if (x > 0 && y < 0)
-      System.out.println("Четверть 4");
-
-    if (x == 0 && y != 0)
-      System.out.println("Ось Y");
-    if (y == 0 && x != 0)
-      System.out.println("Ось X");
-    if (x == 0 && y == 0)
-      System.out.println("Центр");
-
   }
 
 }
