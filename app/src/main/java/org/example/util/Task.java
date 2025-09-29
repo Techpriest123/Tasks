@@ -6,7 +6,7 @@ public interface Task {
 
   public void run(Scanner scan);
 
-  public String getTitel();
+  public String getTitle();
 
   public String getDescription();
 
