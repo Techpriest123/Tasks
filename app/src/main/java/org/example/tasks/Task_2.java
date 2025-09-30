@@ -34,13 +34,24 @@ public class Task_2 implements Task {
     System.out.println("M: ");
     float m = scan.nextFloat();
 
-    if (m < p1 + p2) {
+    if (m < p1 + p2 || n1 < 1 || n2 < 1) {
       System.out.println("Невозможно купить обы видов тортов");
       return;
     }
 
-    float sum1 = p1 * n1;
-    float sum2 = p2 * n2;
+    int n = 0;
 
+    for (int i = 0; i < n1; i++) {
+        float cost1 = i * p1;
+        if (cost1 > m) break;
+
+        float rem = m - cost1;
+        if (rem < p2) break;
+
+        int max2 = Math.min(n2, (int)Math.floor(rem / p2));
+        n = Math.max(n, i + max2);
+    }
+
+    System.out.println("Максимальное число тортов: " + n);
   }
 }

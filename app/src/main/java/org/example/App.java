@@ -5,19 +5,21 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import org.example.tasks.Task_1;
+import org.example.tasks.Task_2;
 import org.example.util.Task;
 
 public class App {
 
-  private static final LinkedList<Task> tasks = new LinkedList<Task>();
+  private static final LinkedList<Task> tasks = new LinkedList<>();
 
   public static void main(String[] args) {
 
     tasks.add(new Task_1());
+    tasks.add(new Task_2());
 
     boolean programShouldHalt = false;
 
-    int prompt = 0;
+    int prompt;
 
     Task task = null;
 
@@ -65,7 +67,8 @@ public class App {
         continue;
       }
       if (prompt == 0) {
-        System.out.println(task.getTitle() + "\n");
+          assert task != null;
+          System.out.println(task.getTitle()  + "\n");
         System.out.println(task.getDescription() + "\n");
         System.out.println("0: Выход");
         scan.nextLine();
