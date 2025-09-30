@@ -5,29 +5,31 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import org.example.tasks.Task_1;
+import org.example.tasks.Task_2;
 import org.example.util.Task;
 
 public class App {
 
-  private static final LinkedList<Task> tasks = new LinkedList<Task>();
+  private static final LinkedList<Task> tasks = new LinkedList<>();
 
   public static void main(String[] args) {
 
     tasks.add(new Task_1());
+    tasks.add(new Task_2());
 
     boolean programShouldHalt = false;
 
-    int prompt = 0;
+    int prompt;
 
     Task task = null;
 
     Scanner scan = new Scanner(System.in);
 
     while (!programShouldHalt) {
-        clearScreen();
+      clearScreen();
       System.out.println("Выберите таск:");
       for (int i = 0; i < tasks.size(); i++) {
-        System.out.println(i + 1 + ": " + tasks.get(i).getTitel());
+        System.out.println(i + 1 + ": " + tasks.get(i).getTitle());
       }
       System.out.println("0: Выход");
 
@@ -57,7 +59,7 @@ public class App {
           2: Демо
           0: Выход
           """);
-        scan.nextLine();
+      scan.nextLine();
       prompt = scan.nextInt() - 1;
       clearScreen();
       if (prompt == -1) {
@@ -65,21 +67,22 @@ public class App {
         continue;
       }
       if (prompt == 0) {
-        System.out.println(task.getTitel() + "\n");
+          assert task != null;
+          System.out.println(task.getTitle()  + "\n");
         System.out.println(task.getDescription() + "\n");
         System.out.println("0: Выход");
-          scan.nextLine();
+        scan.nextLine();
         String p = scan.nextLine();
         while (!Objects.equals(p, "0")) {
           int cnt = p.length();
           System.out.println('\b' * cnt);
-            scan.nextLine();
+          scan.nextLine();
           p = scan.nextLine();
         }
       }
       if (prompt == 1) {
-          assert task != null;
-          task.run(scan);
+        assert task != null;
+        task.run(scan);
       }
     }
     scan.close();
