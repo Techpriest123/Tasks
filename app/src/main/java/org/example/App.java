@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import org.example.tasks.Task_1;
 import org.example.tasks.Task_2;
+import org.example.tasks.Task_4;
 import org.example.util.Task;
 
 public class App {
@@ -16,6 +17,7 @@ public class App {
 
     tasks.add(new Task_1());
     tasks.add(new Task_2());
+    tasks.add(new Task_4());
 
     boolean programShouldHalt = false;
 

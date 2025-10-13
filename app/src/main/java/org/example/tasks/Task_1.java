@@ -4,11 +4,12 @@ import java.util.Scanner;
 import org.example.util.Task;
 
 public class Task_1 implements Task {
-
+  @Override
   public String getTitle() {
     return "Площадь заштрихованой части фигуры (2.9)";
   }
 
+  @Override
   public String getDescription() {
     return """
         Находит площадь заштрихованой части фигуры (2.9)
@@ -16,10 +17,12 @@ public class Task_1 implements Task {
         """;
   }
 
+  @Override
   public String getTaskIndex() {
     return "1";
   }
 
+  @Override
   public void run(Scanner scan) {
 
     float PI = 3.14f;
