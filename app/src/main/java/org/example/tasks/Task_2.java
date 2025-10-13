@@ -4,10 +4,12 @@ import java.util.Scanner;
 import org.example.util.Task;
 
 public class Task_2 implements Task {
+  @Override
   public String getTitle() {
     return "Максимальное количество тортов двух типов";
   }
 
+  @Override
   public String getDescription() {
     return """
         Программа находит максиманое количество тортов,
@@ -18,10 +20,12 @@ public class Task_2 implements Task {
         """;
   }
 
+  @Override
   public String getTaskIndex() {
     return "2";
   }
 
+  @Override
   public void run(Scanner scan) {
     System.out.println("P1: ");
     float p1 = scan.nextFloat();
