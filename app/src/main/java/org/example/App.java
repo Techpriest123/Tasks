@@ -21,7 +21,7 @@ public class App {
 
     boolean programShouldHalt = false;
 
-    int prompt;
+    String prompt = "0";
 
     Task task = null;
 
@@ -35,21 +35,26 @@ public class App {
       }
       System.out.println("0: Выход");
 
-      prompt = scan.nextInt();
+      prompt = scan.nextLine();
 
-      if (prompt == -1) {
-        programShouldHalt = true;
-        continue;
-      } else if (prompt >= tasks.size() || prompt < 0) {
-        System.out.println("No task found");
-      } else {
-        try {
-          task = tasks.get(prompt);
-        } catch (Exception e) {
-          System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
+      try {
+        int p = Integer.parseInt(prompt) - 1;
+        if (p == -1) {
           programShouldHalt = true;
           continue;
+        } else if (p >= tasks.size() || p < 0) {
+          System.out.println("No task found");
+        } else {
+          try {
+            task = tasks.get(p);
+          } catch (Exception e) {
+            System.out.println("Что-то пошло не так:\n" + e + "\nЗавершение");
+            programShouldHalt = true;
+            continue;
+          }
         }
+      } catch (Exception e) {
+        continue;
       }
       if (task == null) {
         System.out.println("Что-то пошло не так\nЗавершение");
@@ -61,36 +66,36 @@ public class App {
           2: Демо
           0: Выход
           """);
-      scan.nextLine();
-      prompt = scan.nextInt() - 1;
+      prompt = scan.nextLine();
       clearScreen();
-      if (prompt == -1) {
-        programShouldHalt = true;
+      try {
+        int p = Integer.parseInt(prompt) - 1;
+        if (p == -1) {
+          continue;
+        }
+        if (p == 0) {
+          do {
+            clearScreen();
+            assert task != null;
+            System.out.println(task.getTitle() + "\n");
+            System.out.println(task.getDescription() + "\n");
+            System.out.println("0: Выход");
+          } while (!Objects.equals(scan.nextLine(), "0"));
+        }
+        if (p == 1) {
+          assert task != null;
+          task.run(scan);
+        }
+      } catch (Exception e) {
         continue;
       }
-      if (prompt == 0) {
-          assert task != null;
-          System.out.println(task.getTitle()  + "\n");
-        System.out.println(task.getDescription() + "\n");
-        System.out.println("0: Выход");
-        scan.nextLine();
-        String p = scan.nextLine();
-        while (!Objects.equals(p, "0")) {
-          int cnt = p.length();
-          System.out.println('\b' * cnt);
-          scan.nextLine();
-          p = scan.nextLine();
-        }
-      }
-      if (prompt == 1) {
-        assert task != null;
-        task.run(scan);
-      }
     }
+    clearScreen();
     scan.close();
   }
 
   public static void clearScreen() {
     System.out.print("\u001b[2J" + "\u001b[H");
   }
+
 }
