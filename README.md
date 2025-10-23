@@ -1,2 +1,7 @@
-<h1>Tasks</h1>
-<p>Tasks for uni</p>
+# Tasks
+Tasks for uni
+## Running
+```
+$ chmod +x run.sh
+$ ./run.sh
+```
