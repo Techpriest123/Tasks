@@ -7,6 +7,7 @@ import java.util.Scanner;
 import org.example.tasks.Task_1;
 import org.example.tasks.Task_2;
 import org.example.tasks.Task_4;
+import org.example.tasks.Task_5;
 import org.example.util.Task;
 
 public class App {
@@ -18,10 +19,11 @@ public class App {
     tasks.add(new Task_1());
     tasks.add(new Task_2());
     tasks.add(new Task_4());
+    tasks.add(new Task_5());
 
     boolean programShouldHalt = false;
 
-    String prompt = "0";
+    String prompt;
 
     Task task = null;
 
@@ -86,8 +88,7 @@ public class App {
           assert task != null;
           task.run(scan);
         }
-      } catch (Exception e) {
-        continue;
+      } catch (Exception ignored) {
       }
     }
     clearScreen();
