@@ -6,13 +6,13 @@ import org.example.util.Task;
 public class Task_1 implements Task {
   @Override
   public String getTitle() {
-    return "Площадь заштрихованой части фигуры (2.9)";
+    return "Площадь заштрихованной части фигуры (2.9)";
   }
 
   @Override
   public String getDescription() {
     return """
-        Находит площадь заштрихованой части фигуры (2.9)
+        Находит площадь заштрихованной части фигуры (2.9)
         по трём радиусам: r1, r2 и r3
         """;
   }

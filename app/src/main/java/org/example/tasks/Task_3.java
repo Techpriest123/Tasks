@@ -69,7 +69,7 @@ public class Task_3 implements Task {
 
     @Override
     public String getDescription() {
-        return "Выводит цвет точки по заданым координатам";
+        return "Выводит цвет точки по заданным координатам";
     }
 
     @Override
