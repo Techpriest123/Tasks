@@ -18,6 +18,8 @@ public class App {
     tasks.add(new Task_3());
     tasks.add(new Task_4());
     tasks.add(new Task_5());
+    tasks.add(new Task_7());
+    tasks.add(new Task_11());
 
     boolean programShouldHalt = false;
 
